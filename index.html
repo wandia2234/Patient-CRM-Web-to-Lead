@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carson Tahoe Health | Patient CRM Test</title>
+  <style>
+    /* ── Reset & base ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2.5rem 1rem 3rem;
+      color: #1e2a3e;
+    }
+
+    /* ── Card ─────────────────────────────────────────────────────── */
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(30,42,62,0.10);
+      width: 100%;
+      max-width: 520px;
+      overflow: hidden;
+    }
+
+    /* ── Header band ──────────────────────────────────────────────── */
+    .card-header {
+      background: #1e2a3e;
+      padding: 2rem 2rem 1.6rem;
+      text-align: center;
+    }
+
+    .card-header .org-name {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.01em;
+      line-height: 1.25;
+    }
+
+    .card-header .org-name .heart {
+      color: #e86f2c;
+      margin-right: 0.3rem;
+    }
+
+    .card-header .tagline {
+      font-size: 0.82rem;
+      color: #a8b4c8;
+      margin-top: 0.35rem;
+    }
+
+    /* ── Test badge ───────────────────────────────────────────────── */
+    .test-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: #e86f2c;
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 20px;
+      padding: 0.3rem 0.85rem;
+      margin-top: 0.9rem;
+    }
+
+    /* ── Form body ────────────────────────────────────────────────── */
+    .card-body {
+      padding: 1.8rem 2rem 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.1rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #1e2a3e;
+      margin-bottom: 0.35rem;
+      letter-spacing: 0.02em;
+    }
+
+    label .req {
+      color: #e86f2c;
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 0.6rem 0.85rem;
+      border: 1.5px solid #d1d8e0;
+      border-radius: 7px;
+      font-size: 0.92rem;
+      color: #1e2a3e;
+      background: #fafbfc;
+      transition: border-color 0.18s, box-shadow 0.18s;
+      outline: none;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus {
+      border-color: #e86f2c;
+      box-shadow: 0 0 0 3px rgba(232,111,44,0.12);
+      background: #fff;
+    }
+
+    /* ── Consent checkbox row ─────────────────────────────────────── */
+    .consent-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      background: #f5f7fa;
+      border: 1.5px solid #d1d8e0;
+      border-radius: 8px;
+      padding: 0.85rem 0.9rem;
+      margin-top: 0.3rem;
+    }
+
+    .consent-row input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      min-width: 17px;
+      accent-color: #e86f2c;
+      margin-top: 2px;
+      cursor: pointer;
+    }
+
+    .consent-row label {
+      margin: 0;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #3a4a5e;
+      cursor: pointer;
+      line-height: 1.45;
+    }
+
+    /* ── Consent fine print ───────────────────────────────────────── */
+    .consent-text {
+      font-size: 0.74rem;
+      color: #6b7a90;
+      line-height: 1.55;
+      margin-top: 0.65rem;
+      padding: 0 0.2rem;
+    }
+
+    .consent-text a {
+      color: #e86f2c;
+      text-decoration: underline;
+    }
+
+    /* ── Divider ──────────────────────────────────────────────────── */
+    .divider {
+      border: none;
+      border-top: 1px solid #e8ecf1;
+      margin: 1.4rem 0 1.2rem;
+    }
+
+    /* ── Submit button ────────────────────────────────────────────── */
+    .btn-submit {
+      width: 100%;
+      padding: 0.75rem;
+      background: #e86f2c;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: background 0.18s, transform 0.1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+    }
+
+    .btn-submit:hover  { background: #cf5f1f; }
+    .btn-submit:active { transform: scale(0.98); }
+
+    /* ── Responsive ───────────────────────────────────────────────── */
+    @media (max-width: 560px) {
+      .card-body { padding: 1.4rem 1.2rem 1.6rem; }
+      .card-header { padding: 1.5rem 1.2rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+
+    <!-- Header -->
+    <div class="card-header">
+      <div class="org-name">
+        <span class="heart">🏥</span>Carson Tahoe Health
+      </div>
+      <div class="tagline">Stay connected with your care team and health community</div>
+      <div class="test-badge">⚡ PATIENT CRM TEST</div>
+    </div>
+
+    <!-- Form body -->
+    <div class="card-body">
+
+      <form
+        action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DWF00000C1HuL"
+        method="POST"
+      >
+        <input type="hidden" name="oid"    value="00DWF00000C1HuL" />
+        <input type="hidden" name="retURL" value="https://www.carsontahoe.com/" />
+
+        <!--
+          Debug fields — uncomment to test in debug mode:
+          <input type="hidden" name="debug"      value="1" />
+          <input type="hidden" name="debugEmail" value="admin+carsontahoe@offprem.tech" />
+        -->
+
+        <!-- First Name -->
+        <div class="form-group">
+          <label for="first_name">First Name <span class="req">*</span></label>
+          <input type="text" id="first_name" name="first_name" maxlength="40" required />
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group">
+          <label for="last_name">Last Name <span class="req">*</span></label>
+          <input type="text" id="last_name" name="last_name" maxlength="80" required />
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" maxlength="80" required />
+        </div>
+
+        <hr class="divider" />
+
+        <!-- Email Consent / Opt-In -->
+        <div class="form-group">
+          <div class="consent-row">
+            <input type="checkbox" id="00NWQ00000F4jlu" name="00NWQ00000F4jlu" value="1" required />
+            <label for="00NWQ00000F4jlu">
+              ✅ I agree to receive communications from Carson Tahoe Health.
+            </label>
+          </div>
+          <p class="consent-text">
+            By giving consent and submitting this form, you agree to receive communications
+            from Carson Tahoe Health regarding health news, wellness programs, upcoming events,
+            and other updates relevant to your care and community. You may opt out at any time
+            by using the unsubscribe link provided in our communications. Please review our
+            <a href="https://www.carsontahoe.com/communications-terms-and-conditions.html" target="_blank">Terms and Conditions</a>
+            and
+            <a href="https://www.carsontahoe.com/communications-privacy-policy.html" target="_blank">Privacy Policy</a>
+            for more information.
+          </p>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn-submit">
+          ✉️ Stay connected
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
